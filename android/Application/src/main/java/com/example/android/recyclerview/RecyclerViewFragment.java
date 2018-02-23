@@ -33,7 +33,7 @@ import com.example.android.common.activities.SampleActivityBase;
  * Demonstrates the use of {@link RecyclerView} with a {@link LinearLayoutManager} and a
  * {@link GridLayoutManager}.
  */
-public class RecyclerViewFragment extends Fragment {
+public class RecyclerViewFragment extends Fragment implements CustomAdapterRNTextInput.OnStartDragListener {
 
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
@@ -54,6 +54,7 @@ public class RecyclerViewFragment extends Fragment {
     protected CustomAdapterRNTextInput mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
     protected String[] mDataset;
+    protected ItemTouchHelper mTouchHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,15 +86,14 @@ public class RecyclerViewFragment extends Fragment {
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        mAdapter = new CustomAdapterRNTextInput((SampleActivityBase)getActivity(), mDataset);
+        mAdapter = new CustomAdapterRNTextInput((SampleActivityBase)getActivity(), mDataset, this);
         // Set OLD_CustomAdapterAztec as the adapter for RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
 
         // DRAG AND DROP
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mAdapter);
-        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
-        touchHelper.attachToRecyclerView(mRecyclerView);
-
+        mTouchHelper = new ItemTouchHelper(callback);
+        mTouchHelper.attachToRecyclerView(mRecyclerView);
 
         mLinearLayoutRadioButton = (RadioButton) rootView.findViewById(R.id.linear_layout_rb);
         mLinearLayoutRadioButton.setOnClickListener(new View.OnClickListener() {
@@ -162,5 +162,10 @@ public class RecyclerViewFragment extends Fragment {
         for (int i = 0; i < DATASET_COUNT; i++) {
             mDataset[i] = "This is element #" + i;
         }
+    }
+
+    @Override
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+        mTouchHelper.startDrag(viewHolder);
     }
 }

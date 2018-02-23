@@ -17,12 +17,16 @@
 package com.example.android.recyclerview;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.android.common.activities.SampleActivityBase;
@@ -44,27 +48,40 @@ public class CustomAdapterRNTextInput extends RecyclerView.Adapter<CustomAdapter
     private final List<String> mItems = new ArrayList<>();
     private Context ctx;
     private ReactInstanceManager mReactInstanceManager;
+    private final OnStartDragListener mDragStartListener;
+
+    public interface OnStartDragListener {
+
+        /**
+         * Called when a view is requesting a start of a drag.
+         *
+         * @param viewHolder The holder of the view to drag.
+         */
+        void onStartDrag(RecyclerView.ViewHolder viewHolder);
+    }
 
     /**
      * Initialize the dataset of the Adapter.
      *
      * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
      */
-    CustomAdapterRNTextInput(SampleActivityBase act, String[] dataSet) {
+    CustomAdapterRNTextInput(SampleActivityBase act, String[] dataSet, OnStartDragListener dragStartListener) {
         mItems.addAll(Arrays.asList(dataSet));
         ctx = act.getBaseContext();
         mReactInstanceManager = act.getReactInstanceManager();
+        mDragStartListener = dragStartListener;
     }
 
     /**
      * Provide a reference to the type of views that you are using (custom ViewHolder)
      */
-    static class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder implements SimpleItemTouchHelperCallback.ItemTouchHelperViewHolder {
         private ReactInstanceManager mReactInstanceManager;
         private LinearLayout container;
         private Button btnUp;
         private Button btnDown;
         private Context mContext;
+        public final ImageView handleView;
 
         MyViewHolder(Context ctx, ReactInstanceManager reactInstanceManager, View v) {
             super(v);
@@ -80,6 +97,7 @@ public class CustomAdapterRNTextInput extends RecyclerView.Adapter<CustomAdapter
             btnUp = v.findViewById(R.id.buttonUp);
             btnDown = v.findViewById(R.id.buttonDown);
             mContext = ctx;
+            handleView = itemView.findViewById(R.id.handle);
         }
 
         // UGLY!!!
@@ -98,6 +116,16 @@ public class CustomAdapterRNTextInput extends RecyclerView.Adapter<CustomAdapter
 
         public Button getBtnDown() {
             return btnDown;
+        }
+
+        @Override
+        public void onItemSelected() {
+            itemView.setBackgroundColor(Color.LTGRAY);
+        }
+
+        @Override
+        public void onItemClear() {
+            itemView.setBackgroundColor(Color.WHITE);
         }
     }
 
@@ -132,6 +160,17 @@ public class CustomAdapterRNTextInput extends RecyclerView.Adapter<CustomAdapter
                 if (pos < mItems.size() -1) {
                     CustomAdapterRNTextInput.this.onItemMove(pos, pos + 1);
                 }
+            }
+        });
+
+        viewHolder.handleView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (MotionEventCompat.getActionMasked(event) ==
+                        MotionEvent.ACTION_DOWN) {
+                    mDragStartListener.onStartDrag(viewHolder);
+                }
+                return false;
             }
         });
     }
