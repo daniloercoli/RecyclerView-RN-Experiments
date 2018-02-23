@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:aztec="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/list_item_height"
+                android:layout_margin="@dimen/margin_small"
+                android:background="@color/white">
+
+
+        <org.wordpress.aztec.AztecText
+            android:id="@+id/aztec"
+            android:focusableInTouchMode="true"
+            android:focusable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/list_item_height"
+            android:fontFamily="serif"
+            android:gravity="top|start"
+            android:hint="Test"
+            android:imeOptions="flagNoExtractUi"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLines="2000"
+            android:paddingEnd="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:scrollbars="none"
+            aztec:textColor="@color/text"
+            aztec:textColorHint="@color/text">
+        </org.wordpress.aztec.AztecText>
+
+        <org.wordpress.aztec.source.SourceViewEditText
+            android:id="@+id/source"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:fontFamily="monospace"
+            android:gravity="top|start"
+            android:imeOptions="flagNoExtractUi"
+            android:inputType="textNoSuggestions|textMultiLine"
+            android:paddingEnd="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:scrollbars="vertical"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+
+    <org.wordpress.aztec.toolbar.AztecToolbar
+        android:id="@+id/formatting_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        aztec:advanced="true">
+    </org.wordpress.aztec.toolbar.AztecToolbar>
+
+</LinearLayout>
