@@ -78,6 +78,7 @@ public class CustomAdapterRNTextInput extends RecyclerView.Adapter<CustomAdapter
     static class MyViewHolder extends RecyclerView.ViewHolder implements SimpleItemTouchHelperCallback.ItemTouchHelperViewHolder {
         private ReactInstanceManager mReactInstanceManager;
         private LinearLayout container;
+        private ReactRootView mReactRootView;
         private Button btnUp;
         private Button btnDown;
         private Context mContext;
@@ -92,22 +93,23 @@ public class CustomAdapterRNTextInput extends RecyclerView.Adapter<CustomAdapter
                     Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
                 }
             });*/
+            mContext = ctx;
             mReactInstanceManager = reactInstanceManager;
             container = v.findViewById(R.id.rn_container);
+            mReactRootView = new ReactRootView(mContext);
+            Bundle RNPropos = new Bundle();
+            RNPropos.putString("text", "");
+            mReactRootView.startReactApplication(mReactInstanceManager, "SimpleTextInput", RNPropos);
+            container.addView(mReactRootView);
             btnUp = v.findViewById(R.id.buttonUp);
             btnDown = v.findViewById(R.id.buttonDown);
-            mContext = ctx;
             handleView = itemView.findViewById(R.id.handle);
         }
 
-        // UGLY!!!
         void refreshReacNativeView(String text){
-            container.removeAllViews();
-            ReactRootView reactRootView = new ReactRootView(mContext);
             Bundle RNPropos = new Bundle();
             RNPropos.putString("text", text);
-            reactRootView.startReactApplication(mReactInstanceManager, "SimpleTextInput", RNPropos);
-            container.addView(reactRootView);
+            mReactRootView.setAppProperties(RNPropos);
         }
 
         public Button getBtnUp() {
@@ -120,12 +122,12 @@ public class CustomAdapterRNTextInput extends RecyclerView.Adapter<CustomAdapter
 
         @Override
         public void onItemSelected() {
-            itemView.setBackgroundColor(Color.LTGRAY);
+           // itemView.setBackgroundColor(Color.LTGRAY);
         }
 
         @Override
         public void onItemClear() {
-            itemView.setBackgroundColor(Color.WHITE);
+            //itemView.setBackgroundColor(Color.WHITE);
         }
     }
 
