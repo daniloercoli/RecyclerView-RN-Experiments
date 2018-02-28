@@ -26,5 +26,4 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecView> {
         return new ReactAztecView(reactContext, mCallerContext);
     }
 
-
 }

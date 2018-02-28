@@ -14,6 +14,7 @@ let display = this.state.isShowingText ? this.props.text : ' ';
 return (
       <View style={styles.container}>
         <RCTAztecView
+         style={styles.hello}
          text = {display}
          editable = {true}
          autoGrow = {true}
@@ -30,6 +31,7 @@ var styles = StyleSheet.create({
   hello: {
     fontSize: 20,
     margin: 10,
+    height:200,
   },
 });
 

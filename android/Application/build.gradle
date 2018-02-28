@@ -26,9 +26,10 @@ dependencies {
     compile "com.android.support:appcompat-v7:27.0.2"
     compile 'com.android.support:recyclerview-v7:27.0.2'
 
-    compile ('com.github.wordpress-mobile.WordPress-Aztec-Android:aztec:v1.1')
-    compile ('com.github.wordpress-mobile.WordPress-Aztec-Android:wordpress-shortcodes:v1.1')
-    compile ('com.github.wordpress-mobile.WordPress-Aztec-Android:wordpress-comments:v1.1')
+    //compile ('com.github.wordpress-mobile.WordPress-Aztec-Android:aztec:v1.1')
+    compile ('com.github.wordpress-mobile.WordPress-Aztec-Android:aztec:d96189662f51c4cd8705871b76603896326c1d88')
+    compile ('com.github.wordpress-mobile.WordPress-Aztec-Android:wordpress-shortcodes:d96189662f51c4cd8705871b76603896326c1d88')
+    compile ('com.github.wordpress-mobile.WordPress-Aztec-Android:wordpress-comments:d96189662f51c4cd8705871b76603896326c1d88')
 
     compile "com.facebook.react:react-native:+" // From node_modules.
 }
