@@ -1,5 +1,6 @@
 import React from 'react';
 import {AppRegistry, StyleSheet, Text, TextInput, View} from 'react-native';
+import RCTAztecView from './AztecView';
 
 class SimpleTextInput extends React.Component {
   constructor(props) {
@@ -12,12 +13,12 @@ class SimpleTextInput extends React.Component {
 let display = this.state.isShowingText ? this.props.text : ' ';
 return (
       <View style={styles.container}>
-        <TextInput style={styles.hello}
+        <RCTAztecView
+         text = {display}
          editable = {true}
          autoGrow = {true}
          multiline = {true}>
-         {display}
-        </TextInput>
+        </RCTAztecView>
       </View>
     );
   }
@@ -33,3 +34,10 @@ var styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('SimpleTextInput', () => SimpleTextInput);
+
+        /*<TextInput style={styles.hello}
+         editable = {true}
+         autoGrow = {true}
+         multiline = {true}>
+         {display}
+        </TextInput>*/
