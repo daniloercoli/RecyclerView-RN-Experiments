@@ -10,7 +10,7 @@ class SimpleTextInput extends React.Component {
 
 
   render() {
-let display = this.state.isShowingText ? this.props.text : ' ';
+let display = this.state.isShowingText ? this.props.my_text : ' ';
 return (
       <View style={styles.container}>
         <RCTAztecView
@@ -18,8 +18,7 @@ return (
          text = {display}
          editable = {true}
          autoGrow = {true}
-         multiline = {true}>
-        </RCTAztecView>
+         multiline = {true} />
       </View>
     );
   }
@@ -31,7 +30,8 @@ var styles = StyleSheet.create({
   hello: {
     fontSize: 20,
     margin: 10,
-    height:200,
+    minHeight: 400,
+   // color: 'red',
   },
 });
 

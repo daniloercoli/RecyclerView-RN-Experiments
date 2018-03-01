@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.annotations.ReactProp;
 
 public class ReactAztecManager extends SimpleViewManager<ReactAztecView> {
 
@@ -26,4 +27,8 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecView> {
         return new ReactAztecView(reactContext, mCallerContext);
     }
 
+    @ReactProp(name = "text")
+    public void setText(ReactAztecView view, String text) {
+        view.fromHtml(text);
+    }
 }
