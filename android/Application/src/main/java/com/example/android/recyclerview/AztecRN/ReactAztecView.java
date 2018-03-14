@@ -21,6 +21,7 @@ public class ReactAztecView extends AztecText {
         super(context);
         this.setFocusableInTouchMode(true);
         this.setFocusable(true);
+
         addPlugin(new WordPressCommentsPlugin(this));
         addPlugin(new MoreToolbarButton(this));
         addPlugin(new CaptionShortcodePlugin(this));
