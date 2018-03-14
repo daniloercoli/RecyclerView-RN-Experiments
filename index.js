@@ -16,6 +16,7 @@ return (
         <RCTAztecView
          style={styles.hello}
          text = {display}
+         color = {'aqua'}
          editable = {true}
          autoGrow = {true}
          multiline = {true} />
@@ -31,7 +32,6 @@ var styles = StyleSheet.create({
     fontSize: 20,
     margin: 10,
     minHeight: 400,
-   // color: 'red',
   },
 });
 

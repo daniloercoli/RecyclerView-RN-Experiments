@@ -5,6 +5,7 @@ var aztex = {
   name: 'AztecView',
   propTypes: {
     text: PropTypes.string,
+    color: PropTypes.string,
     ...ViewPropTypes, // include the default view properties
   },
 };

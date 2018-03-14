@@ -2,6 +2,7 @@ package com.example.android.recyclerview.AztecRN;
 
 
 import android.content.Context;
+import android.graphics.Color;
 
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -30,5 +31,14 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecView> {
     @ReactProp(name = "text")
     public void setText(ReactAztecView view, String text) {
         view.fromHtml(text);
+    }
+    @ReactProp(name = "color")
+    public void setColor(ReactAztecView view, String color) {
+        int newColor = Color.BLACK;
+        try {
+            newColor = Color.parseColor(color);
+        } catch (IllegalArgumentException e) {
+        }
+        view.setTextColor(newColor);
     }
 }
