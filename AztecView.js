@@ -6,6 +6,8 @@ var aztex = {
   propTypes: {
     text: PropTypes.string,
     color: PropTypes.string,
+    maxImagesWidth: PropTypes.number,
+    minImagesWidth: PropTypes.number,
     ...ViewPropTypes, // include the default view properties
   },
 };

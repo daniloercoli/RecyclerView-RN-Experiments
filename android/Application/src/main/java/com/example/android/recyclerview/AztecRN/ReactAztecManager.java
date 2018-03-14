@@ -41,4 +41,12 @@ public class ReactAztecManager extends SimpleViewManager<ReactAztecView> {
         }
         view.setTextColor(newColor);
     }
+    @ReactProp(name = "maxImagesWidth")
+    public void setMaxImagesWidth(ReactAztecView view, int maxWidth) {
+        view.setMaxImagesWidth(maxWidth);
+    }
+    @ReactProp(name = "minImagesWidth")
+    public void setMinImagesWidth(ReactAztecView view, int minWidth) {
+        view.setMinImagesWidth(minWidth);
+    }
 }

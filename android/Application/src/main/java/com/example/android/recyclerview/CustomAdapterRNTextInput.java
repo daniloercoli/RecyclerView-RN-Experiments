@@ -185,7 +185,7 @@ public class CustomAdapterRNTextInput extends RecyclerView.Adapter<CustomAdapter
             container = v.findViewById(R.id.rn_container);
             mReactRootView = new ReactRootView(mContext);
             Bundle RNPropos = new Bundle();
-            RNPropos.putString("my_text", "");
+            RNPropos.putString("text", "");
             mReactRootView.startReactApplication(mReactInstanceManager, "SimpleTextInput", RNPropos);
             container.addView(mReactRootView);
             btnUp = v.findViewById(R.id.buttonUp);
@@ -195,7 +195,7 @@ public class CustomAdapterRNTextInput extends RecyclerView.Adapter<CustomAdapter
 
         void refreshReacNativeView(String text){
             Bundle RNPropos = new Bundle();
-            RNPropos.putString("my_text", EXAMPLE);
+            RNPropos.putString("text", EXAMPLE);
             mReactRootView.setAppProperties(RNPropos);
         }
 
