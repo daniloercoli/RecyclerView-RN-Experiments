@@ -1,7 +1,7 @@
 package com.example.android.recyclerview.AztecRN;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.view.ViewGroup;
 
 import com.facebook.react.uimanager.ThemedReactContext;
 
@@ -21,6 +21,7 @@ public class ReactAztecView extends AztecText {
         super(context);
         this.setFocusableInTouchMode(true);
         this.setFocusable(true);
+        this.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         addPlugin(new WordPressCommentsPlugin(this));
         addPlugin(new MoreToolbarButton(this));
