@@ -8,6 +8,7 @@ var aztex = {
     color: PropTypes.string,
     maxImagesWidth: PropTypes.number,
     minImagesWidth: PropTypes.number,
+    onContentSizeChange: PropTypes.func,
     ...ViewPropTypes, // include the default view properties
   },
 };

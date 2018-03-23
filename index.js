@@ -5,12 +5,12 @@ import RCTAztecView from './AztecView';
 class SimpleTextInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isShowingText: true};
+    this.state = {isShowingText: true, height: 200};
   }
-
 
   render() {
 //let display = this.state.isShowingText ? this.props.my_text : ' ';
+ let myMinHeight = Math.max(200, this.state.height);
     return (
           <View style={styles.container}>
             <FlatList
@@ -25,19 +25,22 @@ class SimpleTextInput extends React.Component {
               ]}
               renderItem={({item}) =>
               <RCTAztecView
-                       style={styles.hello}
-                       text = {this.props.text}
-                       color = {'black'}
-                       maxImagesWidth = {300}
-                       editable = {true}
-                       autoGrow = {true}
-                       multiline = {true} />
+                   {...this.props}
+                   style={[styles.hello, {minHeight: myMinHeight}]}
+                   multiline={true}
+                   text = {this.props.text}
+                   onContentSizeChange= {(event) => {
+                        this.setState({height: event.nativeEvent.contentSize.height});
+                    }}
+                   color = {'black'}
+                   maxImagesWidth = {200} />
               }
             />
           </View>
         );
   }
 }
+
 var styles = StyleSheet.create({
     container: {
      flex: 1,
@@ -50,10 +53,3 @@ var styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('SimpleTextInput', () => SimpleTextInput);
-
-        /*<TextInput style={styles.hello}
-         editable = {true}
-         autoGrow = {true}
-         multiline = {true}>
-         {display}
-        </TextInput>*/
